@@ -43,7 +43,7 @@ p {
     line-height: 2;
 }
 
-.web {
+.web,.ml {
     border-radius: 100%;
     width: 20%;
     float: left;
@@ -83,7 +83,7 @@ h4 {
 }
 
 hr {
-    border: dotted #EAF6F6 6px;
+    border: dotted #a09d9d 6px;
     border-bottom: none;
     width: 5%;
     margin: 50px auto;
