@@ -6,13 +6,16 @@ import {
     TwitterIcon,
 } from './SocialIcons'
 import Experience from './Experience'
-import Newsletter from './NewsLetter'
+import Skills from './Skills'
 import Resume from './Resume'
 import { HomePagePhotos } from './HomePagePhotos'
 
 export function HomePage(props) {
 
     let experiences = props.experience || []
+    let skills = props.skills || []
+
+    console.log("skills",skills)
 
 
     function SocialLink({ icon: Icon, ...props }) {
@@ -64,7 +67,7 @@ export function HomePage(props) {
                         <Experience experience={experiences} />
                     </div>
                     <div className="space-y-10 lg:pl-16 xl:pl-24">
-                        {/* <Newsletter /> */}
+                        <Skills skills={skills} />
                         <Resume />
                     </div>
                 </div>

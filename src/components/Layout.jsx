@@ -6,21 +6,35 @@ import { db } from '../firebase';
 import { useEffect, useState } from 'react'
 
 
-
 export function Layout() {
-  const [docs, setDocs] = useState([])
+  const [experience, setExperience] = useState([])
+  const [skills, setSkills] = useState([])
+
   const getExperience = async () => {
     await getDocs(collection(db, "experience"))
       .then((querySnapshot) => {
         const newData = querySnapshot.docs
           .map((doc) => ({ ...doc.data(), id: doc.id }));
-        setDocs(newData);
-        console.log(newData);
+        setExperience(newData);
+      })
+  }
+
+  const getSkills = async () => {
+    await getDocs(collection(db, 'skills'))
+      .then(querySnapshot => {
+        const data = querySnapshot.docs.map(doc => {
+          return {
+            ...doc.data(),
+            id: doc.id
+          }
+        })
+        setSkills(data)
       })
   }
 
   useEffect(() => {
-    getExperience()
+    getExperience();
+    getSkills()
   }, []);
 
   return (
@@ -32,7 +46,7 @@ export function Layout() {
       </div>
       <div className="relative flex w-full flex-col">
         <Header />
-        <HomePage experience={docs} />
+        <HomePage experience={experience} skills={skills} />
         <Footer />
       </div>
     </div>
