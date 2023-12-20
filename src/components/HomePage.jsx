@@ -1,22 +1,48 @@
 import { Container } from './Container'
 import {
     GitHubIcon,
-    InstagramIcon,
     LinkedInIcon,
-    TwitterIcon,
 } from './SocialIcons'
 import Experience from './Experience'
 import Skills from './Skills'
 import Resume from './Resume'
 import { HomePagePhotos } from './HomePagePhotos'
+import Education from './Education'
+import { useEffect, useState } from 'react'
+import { collection, getDocs } from "firebase/firestore";
+import { db } from '../firebase';
 
-export function HomePage(props) {
+export function HomePage() {
 
-    let experiences = props.experience || []
-    let skills = props.skills || []
+    const [experiences, setExperience] = useState([])
+    const [skills, setSkills] = useState([])
 
-    console.log("skills",skills)
+    const getExperience = async () => {
+        await getDocs(collection(db, "experience"))
+            .then((querySnapshot) => {
+                const newData = querySnapshot.docs
+                    .map((doc) => ({ ...doc.data(), id: doc.id }));
+                setExperience(newData);
+            })
+    }
 
+    const getSkills = async () => {
+        await getDocs(collection(db, 'skills'))
+            .then(querySnapshot => {
+                const data = querySnapshot.docs.map(doc => {
+                    return {
+                        ...doc.data(),
+                        id: doc.id
+                    }
+                })
+                setSkills(data)
+            })
+    }
+
+    useEffect(() => {
+        getExperience();
+        getSkills()
+    }, []);
 
     function SocialLink({ icon: Icon, ...props }) {
         return (
@@ -38,22 +64,14 @@ export function HomePage(props) {
                     </p>
                     <div className="mt-6 flex gap-6">
                         <SocialLink
-                            href="https://twitter.com"
-                            aria-label="Follow on Twitter"
-                            icon={TwitterIcon}
-                        />
-                        <SocialLink
-                            href="https://instagram.com"
-                            aria-label="Follow on Instagram"
-                            icon={InstagramIcon}
-                        />
-                        <SocialLink
-                            href="https://github.com"
+                            href="https://github.com/bhanureddy2105"
+                            target="_blank"
                             aria-label="Follow on GitHub"
                             icon={GitHubIcon}
                         />
                         <SocialLink
-                            href="https://linkedin.com"
+                            href="https://www.linkedin.com/in/bhanuvangeti/"
+                            target="_blank"
                             aria-label="Follow on LinkedIn"
                             icon={LinkedInIcon}
                         />
@@ -67,6 +85,7 @@ export function HomePage(props) {
                         <Experience experience={experiences} />
                     </div>
                     <div className="space-y-10 lg:pl-16 xl:pl-24">
+                        <Education />
                         <Skills skills={skills} />
                         <Resume />
                     </div>

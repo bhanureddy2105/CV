@@ -1,41 +1,9 @@
 import { Footer } from './Footer'
 import { Header } from './Header'
-import { HomePage } from './HomePage'
-import { collection, getDocs } from "firebase/firestore";
-import { db } from '../firebase';
-import { useEffect, useState } from 'react'
 
 
-export function Layout() {
-  const [experience, setExperience] = useState([])
-  const [skills, setSkills] = useState([])
 
-  const getExperience = async () => {
-    await getDocs(collection(db, "experience"))
-      .then((querySnapshot) => {
-        const newData = querySnapshot.docs
-          .map((doc) => ({ ...doc.data(), id: doc.id }));
-        setExperience(newData);
-      })
-  }
-
-  const getSkills = async () => {
-    await getDocs(collection(db, 'skills'))
-      .then(querySnapshot => {
-        const data = querySnapshot.docs.map(doc => {
-          return {
-            ...doc.data(),
-            id: doc.id
-          }
-        })
-        setSkills(data)
-      })
-  }
-
-  useEffect(() => {
-    getExperience();
-    getSkills()
-  }, []);
+export function Layout({children}) {
 
   return (
     <div className='flex h-full bg-zinc-50 dark:bg-black'>
@@ -46,7 +14,7 @@ export function Layout() {
       </div>
       <div className="relative flex w-full flex-col">
         <Header />
-        <HomePage experience={experience} skills={skills} />
+        <main className="flex-auto">{children}</main>
         <Footer />
       </div>
     </div>

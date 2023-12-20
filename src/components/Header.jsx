@@ -6,6 +6,7 @@ import clsx from 'clsx'
 
 import { Container } from './Container'
 import avatarImage from '../images/avatar.png'
+import { useLocation } from 'react-router-dom';
 
 function CloseIcon(props) {
   return (
@@ -136,7 +137,7 @@ function MobileNavigation(props) {
 
 function NavItem({ href, children }) {
   // let isActive = this.props.location.pathname === href
-  let isActive = true
+  let isActive = useLocation().pathname === href
 
 
   return (
@@ -190,7 +191,7 @@ function AvatarContainer({ className, ...props }) {
 
 function Avatar({ large = false, className, ...props }) {
   return (
-    <li
+    <a
       href="/"
       aria-label="Home"
       className={clsx(className, 'pointer-events-auto')}
@@ -206,13 +207,15 @@ function Avatar({ large = false, className, ...props }) {
         )}
         priority
       />
-    </li>
+    </a>
   )
 }
 
 export function Header() {
   // let isHomePage = this.props.location.pathname === '/'
-  let isHomePage = true
+  let isHomePage = useLocation().pathname === '/'
+  // let isHomePage = true
+
 
   let headerRef = useRef(null)
   let avatarRef = useRef(null)

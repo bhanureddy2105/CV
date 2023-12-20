@@ -17,7 +17,7 @@ function Experience({ experience }) {
 
     const getDescription = (des) => {
         let temp = des.split(".")
-        temp = temp.filter(te => te!='')
+        temp = temp.filter(te => te !== '')
         return (temp.map(list => (
             <li className='mb-6'>{list}</li>
         )))
