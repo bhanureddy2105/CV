@@ -6,7 +6,7 @@ function Resume() {
     const handleDownload = () => {
         try {
             const link = document.createElement('a');
-            link.href = '/Resume.pdf';
+            link.href = '/resume.pdf';
             link.download = 'Resume.pdf';
             document.body.appendChild(link);
             link.click();
@@ -17,7 +17,7 @@ function Resume() {
     };
 
     return (       
-        <a href="/Resume.pdf" download>
+        <a href="/resume/resume.pdf" download>
             <Button variant="secondary" className="group mt-6 w-full">
                 Download Resume
                 <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
