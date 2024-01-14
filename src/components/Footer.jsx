@@ -2,12 +2,12 @@ import { ContainerInner, ContainerOuter } from './Container'
 
 function NavLink({ href, children }) {
   return (
-    <li
+    <a
       href={href}
       className="transition hover:text-teal-500 dark:hover:text-teal-400"
     >
       {children}
-    </li>
+    </a>
   )
 }
 

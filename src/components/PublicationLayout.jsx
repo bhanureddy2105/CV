@@ -27,7 +27,7 @@ export function PublicationLayout() {
                     {articles.map((article) => (
                         <article className="md:grid md:grid-cols-4 md:items-baseline">
                             <Card className="md:col-span-3">
-                                <Card.Title href={`/#/publications/${article.id}`}>
+                                <Card.Title href={`#/publications/${article.id}`}>
                                     {article.title}
                                 </Card.Title>
                                 <Card.Eyebrow
