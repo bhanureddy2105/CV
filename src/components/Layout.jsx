@@ -3,7 +3,7 @@ import { Header } from './Header'
 
 
 
-export function Layout({children}) {
+export function Layout({ children }) {
 
   return (
     <div className='flex h-full bg-zinc-50 dark:bg-black'>
