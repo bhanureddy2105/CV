@@ -71,11 +71,11 @@ function MoonIcon(props) {
 
 function MobileNavItem({ href, children }) {
   return (
-    <li>
-      <Popover.Button href={href} className="block py-2">
+    <a href={href}>
+      <Popover.Button className="block py-2">
         {children}
       </Popover.Button>
-    </li>
+    </a>
   )
 }
 
@@ -194,7 +194,7 @@ function AvatarContainer({ className, ...props }) {
 function Avatar({ large = false, className, ...props }) {
   return (
     <a
-      href="/"
+      href="#"
       aria-label="Home"
       className={clsx(className, 'pointer-events-auto')}
       {...props}
